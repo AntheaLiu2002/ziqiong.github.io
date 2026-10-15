@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="柳紫琼 — 交互式个人简历 | 市场营销 × 人工智能 | 科技领导力与创业">
+<title>柳紫琼 · 交互式简历</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070a14'/%3E%3Ccircle cx='11' cy='16' r='6' fill='url(%23g)' opacity='.85'/%3E%3Ccircle cx='21' cy='16' r='6' fill='url(%23g)' opacity='.55'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04050a;
+  --ink:#eef0f8;
+  --muted:#98a1b7;
+  --faint:#6b7490;
+  --line:rgba(255,255,255,.09);
+  --card:rgba(12,15,27,.55);
+  --cyan:#22d3ee;
+  --violet:#a78bfa;
+  --pink:#f472b6;
+  --emerald:#34d399;
+  --amber:#fbbf24;
+  --sans:'Noto Sans SC',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  --serif:'Noto Serif SC',Georgia,serif;
+  --mono:'Space Grotesk','Noto Sans SC',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.no-lenis{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+section[id]{scroll-margin-top:64px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(34,211,238,.32);color:#fff}
+
+/* ---------- 背景层 ---------- */
+.bg-aura{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(52rem 32rem at 82% -8%, rgba(167,139,250,.13), transparent 62%),
+    radial-gradient(46rem 30rem at -12% 30%, rgba(34,211,238,.10), transparent 60%),
+    radial-gradient(40rem 26rem at 50% 115%, rgba(244,114,182,.08), transparent 60%),
+    var(--bg);
+}
+#fluid{position:fixed;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;opacity:.92}
+.no-fluid #fluid{display:none}
+.no-fluid .bg-aura{background:
+    radial-gradient(52rem 32rem at 82% -8%, rgba(167,139,250,.16), transparent 62%),
+    radial-gradient(46rem 30rem at -12% 30%, rgba(34,211,238,.12), transparent 60%),
+    radial-gradient(40rem 26rem at 50% 115%, rgba(244,114,182,.10), transparent 60%),
+    var(--bg);}
+.grain{
+  position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+main{position:relative;z-index:10}
+
+/* ---------- 自定义光标 ---------- */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:120;pointer-events:none;border-radius:50%;will-change:transform}
+.cursor-dot{width:8px;height:8px;background:var(--cyan);margin:-4px 0 0 -4px;box-shadow:0 0 12px rgba(34,211,238,.9)}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(238,240,248,.45);margin:-18px 0 0 -18px;transition:width .25s,height .25s,margin .25s,border-color .25s,background .25s}
+.cursor-ring.is-active{width:58px;height:58px;margin:-29px 0 0 -29px;border-color:var(--cyan);background:rgba(34,211,238,.08)}
+@media (pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+/* ---------- 顶部导航 ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem clamp(1.2rem,4vw,2.6rem);
+  background:rgba(4,5,10,.42);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-name{font-family:var(--serif);font-weight:700;font-size:1.02rem;color:var(--ink);text-decoration:none;letter-spacing:.06em}
+.nav-name span{font-family:var(--mono);font-weight:400;font-size:.72rem;color:var(--cyan);margin-left:.35rem;letter-spacing:.08em}
+.nav-links{display:flex;gap:clamp(.9rem,2.4vw,2rem)}
+.nav-links a{
+  position:relative;color:var(--muted);text-decoration:none;font-size:.86rem;letter-spacing:.14em;
+  padding:.25rem 0;transition:color .3s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.65,0,.35,1);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);transform-origin:left}
+@media (max-width:640px){.nav-links a:not(:first-child){display:none}}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;background:transparent}
+.progress-bar{height:100%;width:100%;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 12px rgba(34,211,238,.5)}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;position:relative;padding:6rem 1.4rem 4rem}
+.hero-inner{max-width:1100px;width:100%;text-align:center}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1.6rem;
+}
+.hero-eyebrow .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin:0 .8em;vertical-align:middle;box-shadow:0 0 10px var(--cyan);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-name{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(4rem,15vw,10.5rem);
+  line-height:1.06;letter-spacing:.04em;
+  background:linear-gradient(100deg,#f5f8ff 12%,#b7e6f5 38%,#c9b8ff 62%,#f5f8ff 90%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 0 34px rgba(103,232,249,.22));
+  margin-bottom:.6rem;
+}
+.hero-name .ch{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .02em}
+.hero-name .ch>span{display:inline-block;will-change:transform}
+.hero-en{
+  font-family:var(--mono);font-weight:400;color:var(--muted);
+  font-size:clamp(.8rem,2vw,1.05rem);letter-spacing:.62em;text-indent:.62em;
+  text-transform:uppercase;margin-bottom:2.2rem;
+}
+.hero-sub{font-size:clamp(1rem,2.4vw,1.28rem);font-weight:400;color:#cdd5e6;max-width:44rem;margin:0 auto 1.1rem}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.hero-sub .sep{color:var(--cyan);margin:0 .6em;font-weight:400}
+.hero-schools{font-size:.95rem;color:var(--faint);margin-bottom:2.6rem}
+.hero-schools b{color:var(--muted);font-weight:500}
+.hero-chips{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.55rem 1.15rem;border-radius:999px;
+  border:1px solid var(--line);background:rgba(12,15,27,.5);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#d5dbea;text-decoration:none;font-size:.88rem;letter-spacing:.03em;
+  transition:border-color .3s,color .3s,box-shadow .3s,transform .3s;
+}
+.chip svg{width:15px;height:15px;stroke:var(--cyan);flex:none}
+.chip:hover{border-color:rgba(34,211,238,.55);color:#fff;box-shadow:0 0 24px rgba(34,211,238,.18);transform:translateY(-2px)}
+.scroll-hint{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;
+  color:var(--faint);font-family:var(--mono);font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+}
+.scroll-hint .mouse{width:22px;height:34px;border:1px solid rgba(238,240,248,.35);border-radius:12px;position:relative}
+.scroll-hint .mouse::after{
+  content:"";position:absolute;top:6px;left:50%;width:3px;height:7px;margin-left:-1.5px;
+  border-radius:2px;background:var(--cyan);animation:wheel 1.8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+
+/* ---------- 跑马灯 ---------- */
+.marquee{
+  position:relative;overflow:hidden;padding:1.1rem 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:rgba(6,8,15,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transform:rotate(-1.2deg) scale(1.02);margin:1rem 0 3.5rem;
+}
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee-track span{
+  font-family:var(--mono);font-size:clamp(.85rem,2vw,1.05rem);letter-spacing:.22em;
+  white-space:nowrap;color:var(--muted);padding-right:.5em;
+}
+.marquee-track span i{font-style:normal;color:var(--cyan);padding:0 .7em}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- 版式骨架 ---------- */
+section{max-width:1100px;margin:0 auto;padding:clamp(4rem,9vw,7.5rem) clamp(1.2rem,4vw,2.4rem) 0}
+.sec-head{display:flex;align-items:baseline;gap:1.1rem;margin-bottom:3rem}
+.sec-index{font-family:var(--mono);font-size:.85rem;color:var(--cyan);letter-spacing:.2em}
+.sec-title{
+  font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,4.6vw,3rem);
+  letter-spacing:.05em;line-height:1.2;white-space:nowrap;
+}
+.sec-title .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.sec-title .w>span{display:inline-block;will-change:transform}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(34,211,238,.5),transparent);transform-origin:left;min-width:2rem}
+.glass{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 18px 50px -22px rgba(0,0,0,.75);
+  transition:border-color .35s,box-shadow .35s;
+}
+.glass:hover{border-color:rgba(34,211,238,.28);box-shadow:0 22px 60px -20px rgba(0,0,0,.85),0 0 0 1px rgba(34,211,238,.06)}
+
+/* ---------- 关于 ---------- */
+.about-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:1.4rem}
+@media (max-width:880px){.about-grid{grid-template-columns:1fr}}
+.about-text{padding:2.2rem clamp(1.5rem,3vw,2.4rem)}
+.about-text p{font-size:1.02rem;color:#c3cadb;margin-bottom:1.1rem}
+.about-text p:last-child{margin-bottom:0}
+.about-text strong{color:var(--ink);font-weight:500}
+.about-text em{font-style:normal;color:var(--cyan)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.stat{padding:1.7rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.15rem}
+.stat-num{
+  font-family:var(--mono);font-weight:700;font-size:clamp(2rem,4.5vw,2.9rem);line-height:1;
+  background:linear-gradient(120deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+}
+.stat-suffix{font-family:var(--mono);font-size:1rem;color:var(--violet);margin-left:.25em}
+.stat p{font-size:.84rem;color:var(--muted);margin-top:.45rem;letter-spacing:.04em}
+
+/* ---------- 教育 ---------- */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+@media (max-width:880px){.edu-grid{grid-template-columns:1fr}}
+.edu-card{padding:2rem clamp(1.4rem,2.6vw,2rem)}
+.edu-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.3rem}
+.edu-top h3{font-family:var(--serif);font-weight:700;font-size:1.3rem;letter-spacing:.03em}
+.qs{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--cyan);
+  border:1px solid rgba(34,211,238,.4);border-radius:999px;padding:.28rem .8rem;white-space:nowrap;
+  background:rgba(34,211,238,.07);
+}
+.edu-meta{font-family:var(--mono);font-size:.8rem;color:var(--faint);letter-spacing:.06em;margin-bottom:1.3rem}
+.edu-deg{list-style:none;margin-bottom:1.2rem}
+.edu-deg li{padding:.85rem 0 .85rem 1.05rem;position:relative;font-size:.97rem;color:#c9d1e2;border-bottom:1px dashed rgba(255,255,255,.07)}
+.edu-deg li:last-child{border-bottom:none}
+.edu-deg li::before{content:"";position:absolute;left:0;top:1.32rem;width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(120deg,var(--cyan),var(--violet));box-shadow:0 0 8px rgba(34,211,238,.6)}
+.edu-deg li b{color:var(--ink);font-weight:500}
+.edu-deg li time{display:block;font-family:var(--mono);font-size:.78rem;color:var(--faint);margin-top:.15rem;letter-spacing:.05em}
+.gpa{
+  display:inline-block;font-family:var(--mono);font-size:.86rem;color:var(--amber);
+  background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);
+  border-radius:10px;padding:.35rem .9rem;margin-bottom:1.3rem;letter-spacing:.05em;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.chips .c{font-size:.78rem;color:#b9c2d6;padding:.3rem .78rem;border-radius:999px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);letter-spacing:.02em}
+.honor{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
+.honor + .honor{margin-top:.6rem}
+.honor b{color:var(--pink);font-weight:500;letter-spacing:.08em;margin-right:.4em}
+
+/* ---------- 经历时间线 ---------- */
+.timeline{position:relative;padding-left:2.2rem}
+.tl-line{
+  position:absolute;left:.48rem;top:.4rem;bottom:.4rem;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--cyan),var(--violet),rgba(244,114,182,.35));
+  transform-origin:top;box-shadow:0 0 14px rgba(34,211,238,.35);
+}
+.tl-company{margin-bottom:2.6rem}
+.tl-company:last-child{margin-bottom:0}
+.tl-co-name{font-family:var(--serif);font-weight:700;font-size:1.24rem;letter-spacing:.03em;
+  display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.tl-co-name span{font-family:var(--mono);font-size:.76rem;color:var(--faint);letter-spacing:.12em;font-weight:400}
+.tl-item{position:relative;margin-bottom:1.3rem}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-2.2rem;top:.55rem;width:13px;height:13px;border-radius:50%;
+  background:#0a0d18;border:2px solid var(--cyan);transform:translateX(.5px);box-shadow:0 0 12px rgba(34,211,238,.7)}
+.tl-item:nth-child(odd) .tl-dot{border-color:var(--violet);box-shadow:0 0 12px rgba(167,139,250,.7)}
+.tl-role{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.05rem 1.4rem .9rem}
+.tl-role h4{font-size:1.02rem;font-weight:500;color:var(--ink);letter-spacing:.02em}
+.tl-role time{font-family:var(--mono);font-size:.78rem;color:var(--cyan);letter-spacing:.06em;white-space:nowrap}
+.tl-bullets{list-style:none;padding:.2rem 1.4rem 1.15rem;border-top:1px solid rgba(255,255,255,.05)}
+.tl-bullets li{position:relative;padding-left:1.15rem;font-size:.93rem;color:#bcc4d6;margin-top:.55rem}
+.tl-bullets li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:rgba(34,211,238,.75)}
+.tl-bullets em{font-style:normal;color:var(--cyan);font-weight:500}
+.tl-bullets b{color:var(--amber);font-weight:500}
+
+/* ---------- 技能 ---------- */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media (max-width:880px){.skills-grid{grid-template-columns:1fr}}
+.skill-card{padding:1.9rem 1.6rem}
+.skill-card h3{font-size:1.02rem;font-weight:500;letter-spacing:.1em;color:var(--ink);
+  display:flex;align-items:center;gap:.7rem;margin-bottom:1.3rem}
+.skill-card h3::before{content:"";width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 10px rgba(34,211,238,.6)}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.skill-list li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.93rem;color:#c4cbdc;border-bottom:1px dashed rgba(255,255,255,.06);padding-bottom:.8rem}
+.skill-list li:last-child{border-bottom:none;padding-bottom:0}
+.skill-list li span{font-family:var(--mono);font-size:.76rem;color:var(--faint);letter-spacing:.05em;white-space:nowrap}
+.interest-card{grid-column:1/-1;padding:1.9rem 1.6rem}
+.interest-card h3{font-size:1.02rem;font-weight:500;letter-spacing:.1em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
+.interest-card h3::before{content:"";width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,var(--pink),var(--amber));box-shadow:0 0 10px rgba(244,114,182,.5)}
+.interest-card .chips{gap:.6rem;margin-bottom:0}
+.interest-card .c{font-size:.85rem;color:#cfd6e6;padding:.42rem 1rem;border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);transition:transform .3s,border-color .3s,color .3s}
+.interest-card .c:hover{transform:translateY(-3px);border-color:rgba(244,114,182,.5);color:#fff}
+
+/* ---------- 联系 ---------- */
+#contact{text-align:center;padding-bottom:4rem}
+.contact-kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.4em;color:var(--cyan);margin-bottom:1.4rem;text-transform:uppercase}
+.contact-title{font-family:var(--serif);font-weight:900;font-size:clamp(2.6rem,7vw,5rem);letter-spacing:.05em;margin-bottom:1.8rem;line-height:1.15}
+.contact-title .grad{
+  background:linear-gradient(100deg,var(--cyan),var(--violet),var(--pink));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+}
+.mail-link{
+  position:relative;display:inline-block;
+  font-family:var(--mono);font-size:clamp(1rem,3.2vw,1.6rem);letter-spacing:.05em;
+  color:var(--ink);text-decoration:none;padding:.4rem .2rem;margin-bottom:2.4rem;
+}
+.mail-link::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  transform:scaleX(.18);transform-origin:left;transition:transform .45s cubic-bezier(.65,0,.35,1);
+}
+.mail-link:hover::after{transform:scaleX(1)}
+.contact-meta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:5rem}
+.foot{border-top:1px solid var(--line);padding-top:1.6rem;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+  font-size:.78rem;color:var(--faint);letter-spacing:.05em}
+.foot .tech{font-family:var(--mono);font-size:.72rem}
+.foot .tech b{color:var(--muted);font-weight:500}
+
+/* ---------- 悬浮控制 ---------- */
+.float-ui{position:fixed;z-index:80;display:flex;gap:.6rem}
+.float-ui.left{left:clamp(.8rem,2.5vw,1.6rem);bottom:clamp(.8rem,2.5vw,1.6rem)}
+.float-ui.right{right:clamp(.8rem,2.5vw,1.6rem);bottom:clamp(.8rem,2.5vw,1.6rem)}
+.pill-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.55rem 1.05rem;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:rgba(10,13,24,.62);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:var(--muted);font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;
+  transition:color .3s,border-color .3s,box-shadow .3s,opacity .3s,transform .3s;
+}
+.pill-btn:hover{color:var(--ink);border-color:rgba(34,211,238,.45)}
+.pill-btn .led{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 9px var(--emerald);transition:background .3s,box-shadow .3s}
+.pill-btn.off .led{background:var(--faint);box-shadow:none}
+#toTop{opacity:0;pointer-events:none;transform:translateY(8px)}
+#toTop.show{opacity:1;pointer-events:auto;transform:none}
+#toTop svg{width:13px;height:13px;stroke:currentColor}
+
+/* ---------- 入场动画（仅 JS 可用时预隐藏，且可优雅降级） ---------- */
+.js .reveal{opacity:0;transform:translateY(42px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.js .reveal.is-in{opacity:1;transform:none}
+.js .reveal-group>*{opacity:0;transform:translateY(38px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+.js .reveal-group.is-in>*{opacity:1;transform:none}
+.js .sec-title .w>span{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.js .sec-title.is-in .w>span{transform:translateY(0)}
+.js .sec-title.is-in .w:nth-child(2)>span{transition-delay:.08s}
+.js .sec-title.is-in .w:nth-child(3)>span{transition-delay:.16s}
+.js .sec-title.is-in .w:nth-child(4)>span{transition-delay:.24s}
+.js .sec-line{transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.65,0,.35,1)}
+.js .sec-line.is-in{transform:scaleX(1)}
+
+/* ---------- Hero 入场（纯 CSS，无需 JS 也能显形） ---------- */
+@keyframes heroFade{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{opacity:0;animation:heroFade .8s cubic-bezier(.22,.61,.36,1) .15s forwards}
+.hero-name{opacity:0;animation:heroFade 1.05s cubic-bezier(.22,.61,.36,1) .25s forwards}
+.hero-en{opacity:0;animation:heroFade .9s cubic-bezier(.22,.61,.36,1) .6s forwards}
+.hero-sub{opacity:0;animation:heroFade .9s cubic-bezier(.22,.61,.36,1) .72s forwards}
+.hero-schools{opacity:0;animation:heroFade .8s cubic-bezier(.22,.61,.36,1) .86s forwards}
+.hero-chips{opacity:0;animation:heroFade .9s cubic-bezier(.22,.61,.36,1) 1s forwards}
+.scroll-hint{opacity:0;animation:heroFade .8s cubic-bezier(.22,.61,.36,1) 1.3s forwards}
+
+/* ---------- 打印 ---------- */
+@media print{
+  #fluid,.bg-aura,.grain,.nav,.progress,.float-ui,.cursor-dot,.cursor-ring,.marquee,.scroll-hint{display:none!important}
+  body{background:#fff;color:#111}
+  .glass{background:#fff;border:1px solid #ddd;box-shadow:none;backdrop-filter:none}
+  .hero-name{-webkit-text-fill-color:#111;color:#111;background:none;filter:none}
+  .stat-num,.contact-title .grad{-webkit-text-fill-color:#111;color:#111;background:none}
+  section{max-width:100%;padding:1.2rem 0}
+}
+
+/* ---------- 减少动态效果：直接显示全部内容 ---------- */
+@media (prefers-reduced-motion: reduce){
+  .hero-eyebrow,.hero-name,.hero-en,.hero-sub,.hero-schools,.hero-chips,.scroll-hint{
+    animation:none!important;opacity:1!important;transform:none!important}
+  .js .reveal,.js .reveal-group>*,.js .sec-title .w>span,.js .sec-line{
+    opacity:1!important;transform:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-aura"></div>
+<canvas id="fluid"></canvas>
+<div class="grain"></div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<div class="progress"><div class="progress-bar"></div></div>
+
+<nav class="nav">
+  <a class="nav-name" href="#home" data-navlink>柳紫琼<span>.resume</span></a>
+  <div class="nav-links">
+    <a href="#home" data-navlink data-nav="home">首页</a>
+    <a href="#about" data-navlink data-nav="about">关于</a>
+    <a href="#education" data-navlink data-nav="education">教育</a>
+    <a href="#experience" data-navlink data-nav="experience">经历</a>
+    <a href="#skills" data-navlink data-nav="skills">技能</a>
+    <a href="#contact" data-navlink data-nav="contact">联系</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Interactive Resume<span class="dot"></span>交互式简历</p>
+      <h1 class="hero-name" aria-label="柳紫琼">柳紫琼</h1>
+      <p class="hero-en">Liu&nbsp;Ziqiong</p>
+      <p class="hero-sub"><strong>市场营销</strong><span class="sep">×</span><strong>人工智能</strong><span class="sep">·</span>科技领导力与创业</p>
+      <p class="hero-schools"><b>香港科技大学</b> 科技领导力与创业硕士 &nbsp;·&nbsp; <b>香港理工大学</b> 市场营销学士</p>
+      <div class="hero-chips">
+        <a class="chip" href="mailto:zliuhv@connect.ust.hk">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></svg>
+          zliuhv@connect.ust.hk
+        </a>
+        <a class="chip" href="mailto:2834054800@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></svg>
+          2834054800@qq.com
+        </a>
+        <a class="chip" href="tel:+8615763871609">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+          (86) 157 6387 1609
+        </a>
+        <span class="chip" style="cursor:default">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          (852) 6046 8869
+        </span>
+      </div>
+    </div>
+    <div class="scroll-hint"><span class="mouse"></span>Scroll · 搅动流体</div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>MARKETING × AI<i>·</i>DATA STORYTELLING<i>·</i>TECH LEADERSHIP<i>·</i>ENTREPRENEURSHIP<i>·</i>数据可视化<i>·</i>FLUID CREATIVITY<i>·</i>&nbsp;</span>
+      <span>MARKETING × AI<i>·</i>DATA STORYTELLING<i>·</i>TECH LEADERSHIP<i>·</i>ENTREPRENEURSHIP<i>·</i>数据可视化<i>·</i>FLUID CREATIVITY<i>·</i>&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ================= 关于 ================= -->
+  <section id="about">
+    <header class="sec-head">
+      <span class="sec-index">01</span>
+      <h2 class="sec-title"><span class="w"><span>关于</span></span><span class="w"><span>我</span></span></h2>
+      <span class="sec-line"></span>
+    </header>
+    <div class="about-grid">
+      <div class="about-text glass reveal">
+        <p>我是一名兼具<strong>市场营销专业功底</strong>与 <strong>AI 技术应用能力</strong>的复合型人才。从香港理工大学市场营销本科，到香港科技大学「科技领导力与创业」硕士，我始终专注于<em>技术与商业的交叉点</em>。</p>
+        <p>过去几年，我用 <strong>VBA + AI</strong> 把 90% 的文件整理时间压缩掉，用 <strong>Tableau 与数据可视化</strong>重构部门年度报告，也作为随行翻译站上巴黎 CIGRE 国际会议的舞台——我相信<em>好的商业故事，既要数据的骨架，也要表达的体温</em>。</p>
+        <p>课堂之外，我导演校园音乐剧、统筹二十人的专家评审会、在 Enactus 带团队做项目经理。<strong>技术让我跑得快，舞台和团队让我走得远。</strong></p>
+      </div>
+      <div class="stats reveal-group">
+        <div class="stat glass"><span><span class="stat-num" data-count="2">2</span><span class="stat-suffix">段</span></span><p>硕士学术训练<br>QS 44 / QS 57</p></div>
+        <div class="stat glass"><span><span class="stat-num" data-count="4">4</span><span class="stat-suffix">段</span></span><p>名企实习经历<br>HR / 信息 / 金融</p></div>
+        <div class="stat glass"><span><span class="stat-num" data-count="3">3</span><span class="stat-suffix">种</span></span><p>语言能力<br>普通话 / 英语 / 粤语</p></div>
+        <div class="stat glass"><span><span class="stat-num" data-count="90">90</span><span class="stat-suffix">%</span></span><p>流程提效<br>VBA 自动化脚本</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 教育 ================= -->
+  <section id="education">
+    <header class="sec-head">
+      <span class="sec-index">02</span>
+      <h2 class="sec-title"><span class="w"><span>教育背景</span></span></h2>
+      <span class="sec-line"></span>
+    </header>
+    <div class="edu-grid">
+      <article class="edu-card glass reveal">
+        <div class="tilt">
+          <div class="edu-top"><h3>香港科技大学</h3><span class="qs">QS 44</span></div>
+          <p class="edu-meta">中国香港 · THE HONG KONG UNIVERSITY OF SCIENCE AND TECHNOLOGY</p>
+          <ul class="edu-deg">
+            <li><b>理学硕士 · 科技领导力与创业</b><time>2026 / 8 – 2028 / 1（预计）</time></li>
+            <li><b>理学硕士 · 市场营销</b><time>2025 / 8 – 2026 / 6</time></li>
+          </ul>
+          <span class="gpa">GPA 3.68 / 4.3</span>
+          <div class="chips">
+            <span class="c">市场营销与人工智能</span><span class="c">大数据分析</span><span class="c">市场分析</span>
+            <span class="c">数字营销</span><span class="c">营销策略</span><span class="c">品牌管理</span><span class="c">全球市场营销</span>
+          </div>
+          <p class="honor"><b>荣誉</b>内地学生学者联谊会（MSSS）迎新晚会最佳创意编排奖（2025）</p>
+        </div>
+      </article>
+      <article class="edu-card glass reveal">
+        <div class="tilt">
+          <div class="edu-top"><h3>香港理工大学</h3><span class="qs">QS 57</span></div>
+          <p class="edu-meta">中国香港 · THE HONG KONG POLYTECHNIC UNIVERSITY</p>
+          <ul class="edu-deg">
+            <li><b>工商管理学士 · 市场营销</b><time>2021 / 9 – 2025 / 7</time></li>
+          </ul>
+          <span class="gpa">GPA 3.30 / 4.3</span>
+          <div class="chips">
+            <span class="c">管理会计</span><span class="c">基础商业法</span><span class="c">产品管理</span>
+            <span class="c">市场分析</span><span class="c">全球经济环境</span><span class="c">消费者行为</span>
+          </div>
+          <p class="honor"><b>领导力</b>PolyU Enactus 人力资源经理 &amp; 项目经理（2022–2023）；导演艺术节音乐剧《何以诗词，何以中国》（2024）</p>
+          <p class="honor"><b>荣誉</b>孔子学院最佳志愿者（2022 &amp; 2023）；PolyU 年度艺术节优秀表演者（2023 &amp; 2024）；《宪法》和《香港基本法》宣传视频制作特别认证奖（2023）</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 经历 ================= -->
+  <section id="experience">
+    <header class="sec-head">
+      <span class="sec-index">03</span>
+      <h2 class="sec-title"><span class="w"><span>实习经历</span></span></h2>
+      <span class="sec-line"></span>
+    </header>
+    <div class="timeline">
+      <div class="tl-line"></div>
+
+      <div class="tl-company">
+        <h3 class="tl-co-name reveal">山东鲁电线路器材有限公司 <span>中国 · 山东烟台</span></h3>
+        <div class="tl-item reveal">
+          <span class="tl-dot"></span>
+          <div class="tl-role glass"><h4>人力资源与信息部 实习生</h4><time>2026 / 6 – 至今</time></div>
+          <div class="glass tl-bullets">
+            <ul>
+              <li><em>活动组织</em>：负责七一活动主题设计及开场演讲；策划话剧《时空的答卷》，创新引入 <b>AI 音频合成技术</b>实现历史人物原声再现，显著增强节目感染力</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="tl-dot"></span>
+          <div class="tl-role glass"><h4>技术与信息部 实习生</h4><time>2025 / 4 – 2025 / 8</time></div>
+          <div class="glass tl-bullets">
+            <ul>
+              <li><em>流程自动化</em>：借助 AI 开发 <b>VBA 脚本</b>，实现 PDF 数据批量提取与 Excel 格式转换，缩短 <em>90%</em> 的文件整理时间</li>
+              <li><em>采购流程优化</em>：运用思维导图与流程图重构采购操作手册，对核心流程进行标准化，缩短新员工培训周期</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="tl-dot"></span>
+          <div class="tl-role glass"><h4>信息部 实习生</h4><time>2024 / 6 – 2024 / 8</time></div>
+          <div class="glass tl-bullets">
+            <ul>
+              <li><em>活动组织</em>：策划并落地公司七一建党节话剧节目《觉醒新时代》，独立完成剧本编辑、演员统筹及排练调度</li>
+              <li><em>国际调研与沟通</em>：参加法国巴黎举行的 2024 届「国际大电网会议」（CIGRE）进行欧洲市场调研，并担任<b>随行翻译员</b></li>
+              <li><em>会议支持</em>：协助组织由 <em>20 位专家</em>参与的新产品评审会议，负责接待与团队协调联络</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-company">
+        <h3 class="tl-co-name reveal">远东宏信有限公司 <span>中国 · 上海</span></h3>
+        <div class="tl-item reveal">
+          <span class="tl-dot"></span>
+          <div class="tl-role glass"><h4>医疗一部 实习生</h4><time>2023 / 12 – 2024 / 1</time></div>
+          <div class="glass tl-bullets">
+            <ul>
+              <li><em>行业调查分析</em>：系统学习售后回租赁贷款模式，通过 <b>PEST 模型</b>协助部门经理分析医疗行业未来发展情况</li>
+              <li><em>专业报告优化</em>：重构部门年度报告视觉体系，设计数据可视化方案，获得领导的高度认可</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 技能 ================= -->
+  <section id="skills">
+    <header class="sec-head">
+      <span class="sec-index">04</span>
+      <h2 class="sec-title"><span class="w"><span>技能</span></span><span class="w"><span>与</span></span><span class="w"><span>热爱</span></span></h2>
+      <span class="sec-line"></span>
+    </header>
+    <div class="skills-grid">
+      <div class="skill-card glass reveal">
+        <h3>数据与技术</h3>
+        <ul class="skill-list">
+          <li>微软办公软件<span>熟练</span></li>
+          <li>Tableau 数据可视化<span>熟练</span></li>
+          <li>VBA 流程自动化<span>基础</span></li>
+          <li>Python<span>基础</span></li>
+          <li>视频剪辑<span>熟练</span></li>
+        </ul>
+      </div>
+      <div class="skill-card glass reveal">
+        <h3>语言</h3>
+        <ul class="skill-list">
+          <li>普通话<span>母语</span></li>
+          <li>英语<span>流利</span></li>
+          <li>粤语<span>基础</span></li>
+        </ul>
+      </div>
+      <div class="skill-card glass reveal">
+        <h3>专业认证</h3>
+        <ul class="skill-list">
+          <li>心脏复苏员 CPR &amp; AED<span>2021 &amp; 2024</span></li>
+          <li>茶艺师专项技能证书<span>2021</span></li>
+          <li>AI 工具探索<span>持续进行</span></li>
+        </ul>
+      </div>
+      <div class="skill-card glass interest-card reveal">
+        <h3>兴趣爱好</h3>
+        <div class="chips">
+          <span class="c">中国传统文化</span><span class="c">古筝</span><span class="c">竹笛</span><span class="c">阅读</span>
+          <span class="c">心理学</span><span class="c">游泳</span><span class="c">AI 工具探索</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 联系 ================= -->
+  <section id="contact">
+    <header class="sec-head" style="justify-content:center">
+      <span class="sec-index">05</span>
+    </header>
+    <p class="contact-kicker reveal">Let's Talk</p>
+    <h2 class="contact-title reveal">让我们<span class="grad">聊聊</span></h2>
+    <a class="mail-link reveal" href="mailto:zliuhv@connect.ust.hk">zliuhv@connect.ust.hk</a>
+    <div class="contact-meta reveal-group">
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+        (86) 157 6387 1609
+      </span>
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+        (852) 6046 8869
+      </span>
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        中国香港
+      </span>
+    </div>
+    <div class="foot">
+      <span>© 2026 柳紫琼 · Liu Ziqiong. All rights reserved.</span>
+      <span class="tech">Built with <b>WebGL</b> fluid + <b>GSAP</b> scroll motion</span>
+    </div>
+  </section>
+
+</main>
+
+<div class="float-ui left">
+  <button class="pill-btn" id="fluidToggle" aria-pressed="true"><span class="led"></span><span id="fluidToggleLabel">流体特效 ON</span></button>
+</div>
+<div class="float-ui right">
+  <button class="pill-btn" id="toTop" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7-7"/></svg>
+    TOP
+  </button>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+/* ============================================================
+   PART A — WebGL 流体扭曲（GPU 流体：平流 / 涡度 / 压力投影）
+   ============================================================ */
+const FluidFX = (function () {
+  const canvas = document.getElementById('fluid');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let enabled = !reduceMotion;
+  let running = false;
+  let rafId = null;
+  let gl = null, ext = null;
+  let inited = false;
+
+  const isMobile = window.innerWidth < 768 || (navigator.hardwareConcurrency || 8) <= 4;
+  const config = {
+    SIM_RESOLUTION: isMobile ? 96 : 128,
+    DYE_RESOLUTION: isMobile ? 512 : 912,
+    DENSITY_DISSIPATION: 1.15,
+    VELOCITY_DISSIPATION: 0.2,
+    PRESSURE: 0.8,
+    PRESSURE_ITERATIONS: isMobile ? 14 : 20,
+    CURL: 30,
+    SPLAT_RADIUS: 0.2,
+    SPLAT_FORCE: 5200
+  };
+
+  const PALETTE = [
+    [0.13, 0.83, 0.94],  // cyan
+    [0.65, 0.42, 0.98],  // violet
+    [0.96, 0.44, 0.72],  // pink
+    [0.20, 0.83, 0.60],  // emerald
+    [0.98, 0.74, 0.24]   // amber
+  ];
+  function pickColor() {
+    const c = PALETTE[(Math.random() * PALETTE.length) | 0];
+    const j = 0.85 + Math.random() * 0.35;
+    return [c[0] * 0.17 * j, c[1] * 0.17 * j, c[2] * 0.17 * j];
+  }
+
+  /* ---------- 上下文 ---------- */
+  function getWebGLContext(c) {
+    const p = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false, premultipliedAlpha: false };
+    let ctx = c.getContext('webgl2', p);
+    const isWebGL2 = !!ctx;
+    if (!isWebGL2) ctx = c.getContext('webgl', p) || c.getContext('experimental-webgl', p);
+    if (!ctx) return null;
+    let halfFloat, supportLinearFiltering;
+    if (isWebGL2) {
+      ctx.getExtension('EXT_color_buffer_float');
+      supportLinearFiltering = ctx.getExtension('OES_texture_float_linear');
+    } else {
+      halfFloat = ctx.getExtension('OES_texture_half_float');
+      supportLinearFiltering = ctx.getExtension('OES_texture_half_float_linear');
+    }
+    ctx.clearColor(0, 0, 0, 1);
+    const halfFloatTexType = isWebGL2 ? ctx.HALF_FLOAT : (halfFloat ? halfFloat.HALF_FLOAT_OES : ctx.UNSIGNED_BYTE);
+    let formatRGBA, formatRG, formatR;
+    if (isWebGL2) {
+      formatRGBA = getSupportedFormat(ctx, ctx.RGBA16F, ctx.RGBA, halfFloatTexType);
+      formatRG = getSupportedFormat(ctx, ctx.RG16F, ctx.RG, halfFloatTexType);
+      formatR = getSupportedFormat(ctx, ctx.R16F, ctx.RED, halfFloatTexType);
+    } else {
+      formatRGBA = getSupportedFormat(ctx, ctx.RGBA, ctx.RGBA, halfFloatTexType);
+      formatRG = formatRGBA;
+      formatR = formatRGBA;
+    }
+    if (!formatRGBA) {
+      formatRGBA = { internalFormat: ctx.RGBA, format: ctx.RGBA };
+      formatRG = formatRGBA; formatR = formatRGBA;
+      return { gl: ctx, ext: { formatRGBA: formatRGBA, formatRG: formatRG, formatR: formatR, halfFloatTexType: ctx.UNSIGNED_BYTE, supportLinearFiltering: !!supportLinearFiltering } };
+    }
+    return { gl: ctx, ext: { formatRGBA: formatRGBA, formatRG: formatRG, formatR: formatR, halfFloatTexType: halfFloatTexType, supportLinearFiltering: !!supportLinearFiltering } };
+  }
+  function getSupportedFormat(gl, internalFormat, format, type) {
+    if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
+      switch (internalFormat) {
+        case gl.R16F: return getSupportedFormat(gl, gl.RG16F, gl.RG, type);
+        case gl.RG16F: return getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, type);
+        default: return null;
+      }
+    }
+    return { internalFormat: internalFormat, format: format };
+  }
+  function supportRenderTextureFormat(gl, internalFormat, format, type) {
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
+    const fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+    const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    gl.deleteTexture(texture); gl.deleteFramebuffer(fbo);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return status === gl.FRAMEBUFFER_COMPLETE;
+  }
+
+  /* ---------- 着色器源码 ---------- */
+  const baseVertexSrc = [
+    'precision highp float;',
+    'attribute vec2 aPosition;',
+    'varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;',
+    'uniform vec2 texelSize;',
+    'void main () {',
+    '  vUv = aPosition * 0.5 + 0.5;',
+    '  vL = vUv - vec2(texelSize.x, 0.0);',
+    '  vR = vUv + vec2(texelSize.x, 0.0);',
+    '  vT = vUv + vec2(0.0, texelSize.y);',
+    '  vB = vUv - vec2(0.0, texelSize.y);',
+    '  gl_Position = vec4(aPosition, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const copySrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; uniform sampler2D uTexture;',
+    'void main () { gl_FragColor = texture2D(uTexture, vUv); }'
+  ].join('\n');
+
+  const clearSrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; uniform sampler2D uTexture; uniform float value;',
+    'void main () { gl_FragColor = value * texture2D(uTexture, vUv); }'
+  ].join('\n');
+
+  const splatSrc = [
+    'precision highp float; precision highp sampler2D;',
+    'varying vec2 vUv; uniform sampler2D uTarget; uniform float aspectRatio;',
+    'uniform vec3 color; uniform vec2 point; uniform float radius;',
+    'void main () {',
+    '  vec2 p = vUv - point.xy;',
+    '  p.x *= aspectRatio;',
+    '  vec3 splat = exp(-dot(p, p) / radius) * color;',
+    '  vec3 base = texture2D(uTarget, vUv).xyz;',
+    '  gl_FragColor = vec4(base + splat, 1.0);',
+    '}'
+  ].join('\n');
+
+  const advectionSrc = [
+    'precision highp float; precision highp sampler2D;',
+    'varying vec2 vUv; uniform sampler2D uVelocity; uniform sampler2D uSource;',
+    'uniform vec2 texelSize; uniform vec2 dyeTexelSize; uniform float dt; uniform float dissipation;',
+    'vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {',
+    '  vec2 st = uv / tsize - 0.5;',
+    '  vec2 iuv = floor(st); vec2 fuv = fract(st);',
+    '  vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);',
+    '  vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);',
+    '  vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);',
+    '  vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);',
+    '  return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);',
+    '}',
+    'void main () {',
+    '#ifdef MANUAL_FILTERING',
+    '  vec2 coord = vUv - dt * bilerp(uVelocity, vUv, texelSize).xy * texelSize;',
+    '  vec4 result = bilerp(uSource, coord, dyeTexelSize);',
+    '#else',
+    '  vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;',
+    '  vec4 result = texture2D(uSource, coord);',
+    '#endif',
+    '  float decay = 1.0 + dissipation * dt;',
+    '  gl_FragColor = result / decay;',
+    '}'
+  ].join('\n');
+
+  const divergenceSrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;',
+    'uniform sampler2D uVelocity;',
+    'void main () {',
+    '  float L = texture2D(uVelocity, vL).x;',
+    '  float R = texture2D(uVelocity, vR).x;',
+    '  float T = texture2D(uVelocity, vT).y;',
+    '  float B = texture2D(uVelocity, vB).y;',
+    '  vec2 C = texture2D(uVelocity, vUv).xy;',
+    '  if (vL.x < 0.0) { L = -C.x; }',
+    '  if (vR.x > 1.0) { R = -C.x; }',
+    '  if (vT.y > 1.0) { T = -C.y; }',
+    '  if (vB.y < 0.0) { B = -C.y; }',
+    '  float div = 0.5 * (R - L + T - B);',
+    '  gl_FragColor = vec4(div, 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const curlSrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;',
+    'uniform sampler2D uVelocity;',
+    'void main () {',
+    '  float L = texture2D(uVelocity, vL).y;',
+    '  float R = texture2D(uVelocity, vR).y;',
+    '  float T = texture2D(uVelocity, vT).x;',
+    '  float B = texture2D(uVelocity, vB).x;',
+    '  float vorticity = R - L - T + B;',
+    '  gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const vorticitySrc = [
+    'precision highp float; precision highp sampler2D;',
+    'varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;',
+    'uniform sampler2D uVelocity; uniform sampler2D uCurl; uniform float curl; uniform float dt;',
+    'void main () {',
+    '  float L = texture2D(uCurl, vL).x;',
+    '  float R = texture2D(uCurl, vR).x;',
+    '  float T = texture2D(uCurl, vT).x;',
+    '  float B = texture2D(uCurl, vB).x;',
+    '  float C = texture2D(uCurl, vUv).x;',
+    '  vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));',
+    '  force /= length(force) + 0.0001;',
+    '  force *= curl * C;',
+    '  force.y *= -1.0;',
+    '  vec2 vel = texture2D(uVelocity, vUv).xy;',
+    '  vel += force * dt;',
+    '  vel = min(max(vel, -1000.0), 1000.0);',
+    '  gl_FragColor = vec4(vel, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const pressureSrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;',
+    'uniform sampler2D uPressure; uniform sampler2D uDivergence;',
+    'void main () {',
+    '  float L = texture2D(uPressure, vL).x;',
+    '  float R = texture2D(uPressure, vR).x;',
+    '  float T = texture2D(uPressure, vT).x;',
+    '  float B = texture2D(uPressure, vB).x;',
+    '  float divergence = texture2D(uDivergence, vUv).x;',
+    '  float pressure = (L + R + B + T - divergence) * 0.25;',
+    '  gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const gradientSubtractSrc = [
+    'precision mediump float; precision mediump sampler2D;',
+    'varying highp vec2 vUv; varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;',
+    'uniform sampler2D uPressure; uniform sampler2D uVelocity;',
+    'void main () {',
+    '  float L = texture2D(uPressure, vL).x;',
+    '  float R = texture2D(uPressure, vR).x;',
+    '  float T = texture2D(uPressure, vT).x;',
+    '  float B = texture2D(uPressure, vB).x;',
+    '  vec2 velocity = texture2D(uVelocity, vUv).xy;',
+    '  velocity.xy -= vec2(R - L, T - B);',
+    '  gl_FragColor = vec4(velocity, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const displaySrc = [
+    'precision highp float; precision highp sampler2D;',
+    'varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;',
+    'uniform sampler2D uTexture; uniform vec2 texelSize;',
+    'void main () {',
+    '  vec3 c = texture2D(uTexture, vUv).rgb;',
+    '#ifdef SHADING',
+    '  vec3 lc = texture2D(uTexture, vL).rgb;',
+    '  vec3 rc = texture2D(uTexture, vR).rgb;',
+    '  vec3 tc = texture2D(uTexture, vT).rgb;',
+    '  vec3 bc = texture2D(uTexture, vB).rgb;',
+    '  float dx = length(rc) - length(lc);',
+    '  float dy = length(tc) - length(bc);',
+    '  vec3 n = normalize(vec3(dx, dy, length(texelSize)));',
+    '  float diffuse = clamp(dot(n, vec3(0.0, 0.0, 1.0)) + 0.7, 0.72, 1.0);',
+    '  c *= diffuse;',
+    '#endif',
+    '  float a = max(c.r, max(c.g, c.b));',
+    '  gl_FragColor = vec4(c, a);',
+    '}'
+  ].join('\n');
+
+  /* ---------- 编译工具 ---------- */
+  function compileShader(type, source, keywords) {
+    let src = source;
+    if (keywords && keywords.length) src = keywords.map(function (k) { return '#define ' + k + '\n'; }).join('') + src;
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, src);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.warn('Shader compile error:', gl.getShaderInfoLog(shader));
+      return null;
+    }
+    return shader;
+  }
+  function createProgram(vs, fs) {
+    const program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.bindAttribLocation(program, 0, 'aPosition');
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.warn('Program link error:', gl.getProgramInfoLog(program));
+      return null;
+    }
+    return program;
+  }
+  function getUniforms(program) {
+    const uniforms = {};
+    const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < count; i++) {
+      const name = gl.getActiveUniform(program, i).name;
+      uniforms[name] = gl.getUniformLocation(program, name);
+    }
+    return uniforms;
+  }
+  function Program(vs, fs) { this.program = createProgram(vs, fs); this.uniforms = getUniforms(this.program); }
+  Program.prototype.bind = function () { gl.useProgram(this.program); };
+  function Material(vs, fsSrc) { this.vs = vs; this.fsSrc = fsSrc; this.programs = {}; this.activeProgram = null; this.uniforms = null; }
+  Material.prototype.setKeywords = function (keywords) {
+    const hash = keywords.length ? keywords.join('_') : '_';
+    let program = this.programs[hash];
+    if (!program) {
+      const fs = compileShader(gl.FRAGMENT_SHADER, this.fsSrc, keywords);
+      program = fs ? new Program(this.vs, fs) : null;
+      this.programs[hash] = program;
+    }
+    if (!program) return;
+    if (program === this.activeProgram) return;
+    this.uniforms = program.uniforms;
+    this.activeProgram = program;
+  };
+  Material.prototype.bind = function () { if (this.activeProgram) this.activeProgram.bind(); };
+
+  /* ---------- FBO ---------- */
+  function createFBO(w, h, internalFormat, format, type, param) {
+    gl.activeTexture(gl.TEXTURE0);
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
+    const fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+    gl.viewport(0, 0, w, h);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    return {
+      texture: texture, fbo: fbo, width: w, height: h,
+      texelSizeX: 1 / w, texelSizeY: 1 / h,
+      attach: function (id) { gl.activeTexture(gl.TEXTURE0 + id); gl.bindTexture(gl.TEXTURE_2D, texture); return id; }
+    };
+  }
+  function createDoubleFBO(w, h, internalFormat, format, type, param) {
+    let fbo1 = createFBO(w, h, internalFormat, format, type, param);
+    let fbo2 = createFBO(w, h, internalFormat, format, type, param);
+    return {
+      width: w, height: h, texelSizeX: 1 / w, texelSizeY: 1 / h,
+      get read() { return fbo1; }, set read(v) { fbo1 = v; },
+      get write() { return fbo2; }, set write(v) { fbo2 = v; },
+      swap: function () { const t = fbo1; fbo1 = fbo2; fbo2 = t; }
+    };
+  }
+  function resizeFBO(target, w, h, internalFormat, format, type, param) {
+    const newFBO = createFBO(w, h, internalFormat, format, type, param);
+    copyProgram.bind();
+    gl.uniform1i(copyProgram.uniforms.uTexture, target.attach(0));
+    blit(newFBO);
+    return newFBO;
+  }
+  function resizeDoubleFBO(target, w, h, internalFormat, format, type, param) {
+    if (target.width === w && target.height === h) return target;
+    target.read = resizeFBO(target.read, w, h, internalFormat, format, type, param);
+    target.write = createFBO(w, h, internalFormat, format, type, param);
+    target.width = w; target.height = h; target.texelSizeX = 1 / w; target.texelSizeY = 1 / h;
+    return target;
+  }
+
+  let blit = null, baseVertexShader = null, copyProgram = null, clearProgram = null, splatProgram = null,
+      advectionProgram = null, divergenceProgram = null, curlProgram = null, vorticityProgram = null,
+      pressureProgram = null, gradientSubtractProgram = null, displayMaterial = null,
+      dye = null, velocity = null, divergence = null, curl = null, pressure = null;
+
+  /* ---------- 初始化 ---------- */
+  function init() {
+    const ctx = getWebGLContext(canvas);
+    if (!ctx) { document.documentElement.classList.add('no-fluid'); return false; }
+    gl = ctx.gl; ext = ctx.ext;
+
+    blit = (function () {
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+      const elemBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elemBuffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(0);
+      return function (target, clear) {
+        if (target == null) {
+          gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+          gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        } else {
+          gl.viewport(0, 0, target.width, target.height);
+          gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+        }
+        if (clear) { gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); }
+        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+      };
+    })();
+
+    baseVertexShader = compileShader(gl.VERTEX_SHADER, baseVertexSrc);
+    if (!baseVertexShader) { document.documentElement.classList.add('no-fluid'); return false; }
+
+    copyProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, copySrc));
+    clearProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, clearSrc));
+    splatProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, splatSrc));
+    advectionProgram = new Material(baseVertexShader, advectionSrc);
+    advectionProgram.setKeywords(ext.supportLinearFiltering ? [] : ['MANUAL_FILTERING']);
+    divergenceProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, divergenceSrc));
+    curlProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, curlSrc));
+    vorticityProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, vorticitySrc));
+    pressureProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, pressureSrc));
+    gradientSubtractProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, gradientSubtractSrc));
+    displayMaterial = new Material(baseVertexShader, displaySrc);
+    displayMaterial.setKeywords(['SHADING']);
+
+    initFramebuffers();
+    inited = true;
+    return true;
+  }
+
+  function getResolution(resolution) {
+    let aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
+    if (aspectRatio < 1) aspectRatio = 1 / aspectRatio;
+    const min = Math.round(resolution);
+    const max = Math.round(resolution * aspectRatio);
+    if (gl.drawingBufferWidth > gl.drawingBufferHeight) return { width: max, height: min };
+    return { width: min, height: max };
+  }
+  function initFramebuffers() {
+    const simRes = getResolution(config.SIM_RESOLUTION);
+    const dyeRes = getResolution(config.DYE_RESOLUTION);
+    const texType = ext.halfFloatTexType;
+    const rgba = ext.formatRGBA, rg = ext.formatRG, r = ext.formatR;
+    const filtering = ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
+    gl.disable(gl.BLEND);
+    if (dye == null) dye = createDoubleFBO(dyeRes.width, dyeRes.height, rgba.internalFormat, rgba.format, texType, filtering);
+    else dye = resizeDoubleFBO(dye, dyeRes.width, dyeRes.height, rgba.internalFormat, rgba.format, texType, filtering);
+    if (velocity == null) velocity = createDoubleFBO(simRes.width, simRes.height, rg.internalFormat, rg.format, texType, filtering);
+    else velocity = resizeDoubleFBO(velocity, simRes.width, simRes.height, rg.internalFormat, rg.format, texType, filtering);
+    if (divergence == null) divergence = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+    else divergence = resizeFBO(divergence, simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+    if (curl == null) curl = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+    else curl = resizeFBO(curl, simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+    if (pressure == null) pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+    else pressure = resizeDoubleFBO(pressure, simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
+  }
+
+  /* ---------- 模拟步进 ---------- */
+  function correctRadius(radius) {
+    const ar = canvas.width / canvas.height;
+    return ar > 1 ? radius * ar : radius;
+  }
+  function splat(x, y, dx, dy, color, radiusScale) {
+    if (!inited) return;
+    radiusScale = radiusScale || 1;
+    splatProgram.bind();
+    gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+    gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
+    gl.uniform2f(splatProgram.uniforms.point, x, y);
+    gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0);
+    gl.uniform1f(splatProgram.uniforms.radius, correctRadius(config.SPLAT_RADIUS / 100 * radiusScale));
+    blit(velocity.write); velocity.swap();
+    gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+    gl.uniform3f(splatProgram.uniforms.color, color[0], color[1], color[2]);
+    blit(dye.write); dye.swap();
+  }
+  function step(dt) {
+    gl.disable(gl.BLEND);
+    curlProgram.bind();
+    gl.uniform2f(curlProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    gl.uniform1i(curlProgram.uniforms.uVelocity, velocity.read.attach(0));
+    blit(curl);
+
+    vorticityProgram.bind();
+    gl.uniform2f(vorticityProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    gl.uniform1i(vorticityProgram.uniforms.uVelocity, velocity.read.attach(0));
+    gl.uniform1i(vorticityProgram.uniforms.uCurl, curl.attach(1));
+    gl.uniform1f(vorticityProgram.uniforms.curl, config.CURL);
+    gl.uniform1f(vorticityProgram.uniforms.dt, dt);
+    blit(velocity.write); velocity.swap();
+
+    divergenceProgram.bind();
+    gl.uniform2f(divergenceProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    gl.uniform1i(divergenceProgram.uniforms.uVelocity, velocity.read.attach(0));
+    blit(divergence);
+
+    clearProgram.bind();
+    gl.uniform1i(clearProgram.uniforms.uTexture, pressure.read.attach(0));
+    gl.uniform1f(clearProgram.uniforms.value, config.PRESSURE);
+    blit(pressure.write); pressure.swap();
+
+    pressureProgram.bind();
+    gl.uniform2f(pressureProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    gl.uniform1i(pressureProgram.uniforms.uDivergence, divergence.attach(0));
+    for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
+      gl.uniform1i(pressureProgram.uniforms.uPressure, pressure.read.attach(1));
+      blit(pressure.write); pressure.swap();
+    }
+
+    gradientSubtractProgram.bind();
+    gl.uniform2f(gradientSubtractProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    gl.uniform1i(gradientSubtractProgram.uniforms.uPressure, pressure.read.attach(0));
+    gl.uniform1i(gradientSubtractProgram.uniforms.uVelocity, velocity.read.attach(1));
+    blit(velocity.write); velocity.swap();
+
+    advectionProgram.bind();
+    gl.uniform2f(advectionProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+    if (!ext.supportLinearFiltering)
+      gl.uniform2f(advectionProgram.uniforms.dyeTexelSize, velocity.texelSizeX, velocity.texelSizeY);
+    const velId = velocity.read.attach(0);
+    gl.uniform1i(advectionProgram.uniforms.uVelocity, velId);
+    gl.uniform1i(advectionProgram.uniforms.uSource, velId);
+    gl.uniform1f(advectionProgram.uniforms.dt, dt);
+    gl.uniform1f(advectionProgram.uniforms.dissipation, config.VELOCITY_DISSIPATION);
+    blit(velocity.write); velocity.swap();
+
+    gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
+    gl.uniform1i(advectionProgram.uniforms.uSource, dye.read.attach(1));
+    gl.uniform2f(advectionProgram.uniforms.dyeTexelSize, dye.texelSizeX, dye.texelSizeY);
+    gl.uniform1f(advectionProgram.uniforms.dissipation, config.DENSITY_DISSIPATION);
+    blit(dye.write); dye.swap();
+  }
+  function render() {
+    gl.disable(gl.BLEND);
+    displayMaterial.bind();
+    gl.uniform2f(displayMaterial.uniforms.texelSize, 1 / gl.drawingBufferWidth, 1 / gl.drawingBufferHeight);
+    gl.uniform1i(displayMaterial.uniforms.uTexture, dye.read.attach(0));
+    blit(null);
+  }
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
+    const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; return true; }
+    return false;
+  }
+  let lastTime = performance.now();
+  function calcDeltaTime() {
+    const now = performance.now();
+    let dt = (now - lastTime) / 1000;
+    dt = Math.min(dt, 0.016666);
+    lastTime = now;
+    return dt;
+  }
+  function update() {
+    if (!enabled || !inited) { running = false; return; }
+    if (resizeCanvas()) initFramebuffers();
+    applyInputs();
+    step(calcDeltaTime());
+    render();
+    rafId = requestAnimationFrame(update);
+  }
+  function start() {
+    if (!inited) { if (!init()) return; }
+    if (running) return;
+    enabled = true;
+    lastTime = performance.now();
+    running = true;
+    rafId = requestAnimationFrame(update);
+  }
+  function stop() {
+    enabled = false;
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+    if (inited) {
+      gl.disable(gl.BLEND);
+      clearProgram.bind();
+      gl.uniform1i(clearProgram.uniforms.uTexture, dye.read.attach(0));
+      gl.uniform1f(clearProgram.uniforms.value, 0);
+      blit(dye.write); dye.swap();
+      clearProgram.bind();
+      gl.uniform1i(clearProgram.uniforms.uTexture, velocity.read.attach(0));
+      gl.uniform1f(clearProgram.uniforms.value, 0);
+      blit(velocity.write); velocity.swap();
+      render();
+    }
+  }
+
+  /* ---------- 交互输入 ---------- */
+  const pointer = { x: 0.5, y: 0.5, dx: 0, dy: 0, moved: false };
+  function correctDeltaX(delta) { const ar = canvas.width / canvas.height; if (ar < 1) delta *= ar; return delta; }
+  function correctDeltaY(delta) { const ar = canvas.width / canvas.height; if (ar > 1) delta /= ar; return delta; }
+  function applyInputs() {
+    if (pointer.moved) {
+      pointer.moved = false;
+      splat(pointer.x, pointer.y, pointer.dx * config.SPLAT_FORCE, pointer.dy * config.SPLAT_FORCE, pickColor());
+    }
+    pointer.dx = 0; pointer.dy = 0;
+  }
+  window.addEventListener('mousemove', function (e) {
+    const x = e.clientX / window.innerWidth;
+    const y = 1 - e.clientY / window.innerHeight;
+    pointer.dx += correctDeltaX(x - pointer.x);
+    pointer.dy += correctDeltaY(y - pointer.y);
+    pointer.x = x; pointer.y = y;
+    if (Math.abs(pointer.dx) > 0 || Math.abs(pointer.dy) > 0) pointer.moved = true;
+  }, { passive: true });
+
+  window.addEventListener('pointerdown', function (e) {
+    if (!enabled || !inited) return;
+    if (e.target && e.target.closest && e.target.closest('a, button')) return;
+    const x = e.clientX / window.innerWidth;
+    const y = 1 - e.clientY / window.innerHeight;
+    for (let i = 0; i < 7; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = Math.random() * 0.035;
+      const f = 900 + Math.random() * 2600;
+      splat(x + Math.cos(a) * r, y + Math.sin(a) * r, Math.cos(a) * f, Math.sin(a) * f, pickColor(), 1.5);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', function (e) {
+    if (!enabled || !inited) return;
+    const t = e.touches[0];
+    if (!t) return;
+    const x = t.clientX / window.innerWidth;
+    const y = 1 - t.clientY / window.innerHeight;
+    pointer.dx += correctDeltaX(x - pointer.x) * 1.4;
+    pointer.dy += correctDeltaY(y - pointer.y) * 1.4;
+    pointer.x = x; pointer.y = y;
+    pointer.moved = true;
+  }, { passive: true });
+
+  // 滚动搅动流体
+  let lastScrollSplat = 0;
+  window.FluidScrollStir = function () {
+    if (!enabled || !inited) return;
+    const now = performance.now();
+    if (now - lastScrollSplat < 85) return;
+    lastScrollSplat = now;
+    const x = 0.12 + Math.random() * 0.76;
+    const y = 0.15 + Math.random() * 0.7;
+    splat(x, y, (Math.random() - 0.5) * 1300, (Math.random() - 0.5) * 900, pickColor(), 1.8);
+  };
+
+  // 环境自发涌动
+  setInterval(function () {
+    if (!enabled || !inited) return;
+    const x = 0.12 + Math.random() * 0.76;
+    const y = 0.12 + Math.random() * 0.76;
+    splat(x, y, (Math.random() - 0.5) * 800, (Math.random() - 0.5) * 800, pickColor(), 2.2);
+  }, 2600);
+
+  // 页面不可见时暂停
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null; running = false;
+    } else if (enabled) {
+      start();
+    }
+  });
+
+  // 初始色块
+  function seed() {
+    for (let i = 0; i < 3; i++) {
+      splat(0.25 + Math.random() * 0.5, 0.25 + Math.random() * 0.5,
+        (Math.random() - 0.5) * 1400, (Math.random() - 0.5) * 1400, pickColor(), 2.4);
+    }
+  }
+
+  return {
+    start: start,
+    stop: stop,
+    seed: seed,
+    toggle: function () {
+      if (enabled) { stop(); return false; }
+      start(); seed(); return true;
+    },
+    get enabled() { return enabled; }
+  };
+})();
+window.FluidFX = FluidFX;
+/* ============================================================
+   PART B — 滚动驱动动效（纯原生，无外部依赖）/ 交互
+   ============================================================ */
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  /* ---------- 安全兜底：无论发生什么，3.2s 后强制显示所有内容 ---------- */
+  function revealAll() {
+    var els = document.querySelectorAll('.reveal,.reveal-group,.sec-title,.sec-line');
+    for (var i = 0; i < els.length; i++) els[i].classList.add('is-in');
+  }
+
+  /* ---------- Hero 兜底：动画异常时强制显形（不影响滚动揭示） ---------- */
+  setTimeout(function () {
+    var hs = document.querySelectorAll('.hero-eyebrow,.hero-name,.hero-en,.hero-sub,.hero-schools,.hero-chips');
+    for (var i = 0; i < hs.length; i++) { if (getComputedStyle(hs[i]).opacity === '0') hs[i].style.opacity = '1'; }
+  }, 2600);
+
+  /* ---------- 滚动揭示（IntersectionObserver） ---------- */
+  if (hasIO) {
+    try {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var t = en.target;
+          if (t.classList.contains('reveal-group')) {
+            var kids = t.children;
+            for (var i = 0; i < kids.length; i++) kids[i].style.transitionDelay = (i * 0.1) + 's';
+          }
+          t.classList.add('is-in');
+          io.unobserve(t);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      var obs = document.querySelectorAll('.reveal,.reveal-group,.sec-title,.sec-line');
+      for (var k = 0; k < obs.length; k++) io.observe(obs[k]);
+    } catch (e) { revealAll(); }
+  } else {
+    revealAll();
+  }
+
+  /* ---------- 数字计数 ---------- */
+  var counters = document.querySelectorAll('.stat-num');
+  function runCount(el) {
+    var target = parseFloat(el.dataset.count || '0');
+    if (reduceMotion) { el.textContent = String(target); return; }
+    var dur = 1700, start = performance.now();
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if (hasIO) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { runCount(en.target); cio.unobserve(en.target); } });
+    }, { threshold: 0.5 });
+    for (var c = 0; c < counters.length; c++) cio.observe(counters[c]);
+  } else {
+    for (var c2 = 0; c2 < counters.length; c2++) runCount(counters[c2]);
+  }
+
+  /* ---------- 顶部进度条 + Hero 视差 + 导航高亮 + 回到顶部 ---------- */
+  var progress = document.querySelector('.progress-bar');
+  var heroInner = document.querySelector('.hero-inner');
+  var scrollHint = document.querySelector('.scroll-hint');
+  var toTop = document.getElementById('toTop');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var ticking = false;
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset || 0;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+    if (heroInner && !reduceMotion) heroInner.style.transform = 'translateY(' + (-y * 0.14) + 'px)';
+    if (scrollHint) scrollHint.style.opacity = String(Math.max(0, 1 - y / 320));
+    if (toTop) toTop.classList.toggle('show', y > 600);
+    var active = '';
+    var mid = window.innerHeight * 0.45;
+    for (var i = 0; i < sections.length; i++) {
+      var r = sections[i].getBoundingClientRect();
+      if (r.top <= mid && r.bottom >= mid) { active = sections[i].id; break; }
+    }
+    for (var n = 0; n < navLinks.length; n++) navLinks[n].classList.toggle('active', navLinks[n].dataset.nav === active);
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { requestAnimationFrame(function () { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- 锚点导航 ---------- */
+  document.querySelectorAll('[data-navlink]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (!id || id.charAt(0) !== '#') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + (window.scrollY || window.pageYOffset) - 56;
+      window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---------- 自定义光标 ---------- */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var dot = document.querySelector('.cursor-dot');
+    var ring = document.querySelector('.cursor-ring');
+    var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+    window.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      if (dot) dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+    }, { passive: true });
+    (function loop() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      if (ring) ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, button, .chip').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { if (ring) ring.classList.add('is-active'); });
+      el.addEventListener('mouseleave', function () { if (ring) ring.classList.remove('is-active'); });
+    });
+  }
+
+  /* ---------- 流体开关 / 回到顶部 ---------- */
+  var toggle = document.getElementById('fluidToggle');
+  var toggleLabel = document.getElementById('fluidToggleLabel');
+  if (toggle) {
+    if (!window.FluidFX.enabled) {
+      toggle.classList.add('off');
+      toggleLabel.textContent = '流体特效 OFF';
+      toggle.setAttribute('aria-pressed', 'false');
+    }
+    toggle.addEventListener('click', function () {
+      var on = window.FluidFX.toggle();
+      toggle.classList.toggle('off', !on);
+      toggleLabel.textContent = on ? '流体特效 ON' : '流体特效 OFF';
+      toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  if (toTop) {
+    toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+  }
+
+  /* ---------- 启动流体（失败不影响内容） ---------- */
+  try { window.FluidFX.start(); window.FluidFX.seed(); } catch (err) {}
+
+  /* ---------- 卡片 3D 倾斜 ---------- */
+  if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+    document.querySelectorAll('.tilt').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transition = 'transform .12s ease-out';
+        card.style.transform = 'perspective(900px) rotateY(' + (px * 6) + 'deg) rotateX(' + (-py * 6) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'transform .7s cubic-bezier(.22,.61,.36,1)';
+        card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
